@@ -6,9 +6,18 @@
  */
 
 //Defaults
+#ifndef DEFAULT_CLIENT_SSID
 #define DEFAULT_CLIENT_SSID "Your_Network"
+#endif
+#ifndef DEFAULT_AP_SSID
+#define DEFAULT_AP_SSID     "WLED-AP"
+#endif
+#ifndef DEFAULT_AP_PASS
 #define DEFAULT_AP_PASS     "wled1234"
+#endif
+#ifndef DEFAULT_OTA_PASS
 #define DEFAULT_OTA_PASS    "wledota"
+#endif
 
 //increase if you need more
 #ifndef WLED_MAX_USERMODS
