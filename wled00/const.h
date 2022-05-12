@@ -86,6 +86,7 @@
 #define USERMOD_ID_MY9291                28     //Usermod "usermod_MY9291.h"
 #define USERMOD_ID_SI7021_MQTT_HA        29     //Usermod "usermod_si7021_mqtt_ha.h"
 #define USERMOD_ID_NV_SEGMENTS           30     //Usermod "usermod_v2_nonvolatile_segments.h"
+#define USERMOD_ID_MST                   31     //Usermod "usermod_v2_mult_strip_type.h"
 
 //Access point behavior
 #define AP_BEHAVIOR_BOOT_NO_CONN          0     //Open AP when no connection after boot

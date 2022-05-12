@@ -619,6 +619,20 @@ class BusManager {
     return numBusses++;
   }
 
+  int replace(BusConfig &bc, uint8_t busId) {
+    if (busId >= WLED_MAX_BUSSES || busId > numBusses || busses[busId] == nullptr) return -1;
+
+    delete busses[busId];
+    if (bc.type >= TYPE_NET_DDP_RGB && bc.type < 96) {
+      busses[busId] = new BusNetwork(bc);
+    } else if (IS_DIGITAL(bc.type)) {
+      busses[busId] = new BusDigital(bc, busId, colorOrderMap);
+    } else {
+      busses[busId] = new BusPwm(bc);
+    }
+    return busId;
+  }
+
   //do not call this method from system context (network callback)
   void removeAll() {
     DEBUG_PRINTLN(F("Removing all."));
