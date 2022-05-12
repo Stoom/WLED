@@ -23,6 +23,9 @@
 
 // format: "~ MM-DD HH:MM:SS ~"
 #define PRESET_NAME_BUFFER_SIZE 25
+#ifndef USERMOD_AUTOSAVE_MAX_SECONDS
+#define USERMOD_AUTOSAVE_MAX_SECONDS 3600
+#endif
 
 class AutoSaveUsermod : public Usermod {
 
@@ -33,7 +36,7 @@ class AutoSaveUsermod : public Usermod {
     bool enabled = true;
 
     // configurable parameters
-    uint16_t autoSaveAfterSec = 15;       // 15s by default
+    uint16_t autoSaveAfterSec = 60;       // 60 by default
     uint8_t autoSavePreset = 250;         // last possible preset
     bool applyAutoSaveOnBoot = false;     // do we load auto-saved preset on boot?
 
@@ -207,7 +210,7 @@ class AutoSaveUsermod : public Usermod {
 
       enabled             = top[FPSTR(_autoSaveEnabled)] | enabled;
       autoSaveAfterSec    = top[FPSTR(_autoSaveAfterSec)] | autoSaveAfterSec;
-      autoSaveAfterSec    = (uint16_t) min(3600,max(10,(int)autoSaveAfterSec)); // bounds checking
+      autoSaveAfterSec    = (uint16_t) min(USERMOD_AUTOSAVE_MAX_SECONDS,max(10,(int)autoSaveAfterSec)); // bounds checking
       autoSavePreset      = top[FPSTR(_autoSavePreset)] | autoSavePreset;
       autoSavePreset      = (uint8_t) min(250,max(100,(int)autoSavePreset)); // bounds checking
       applyAutoSaveOnBoot = top[FPSTR(_autoSaveApplyOnBoot)] | applyAutoSaveOnBoot;
