@@ -28,6 +28,9 @@ void WLED::reset()
     yield();        // enough time to send response to client
   }
   applyBri();
+  #ifdef WLED_DISPOSE_USERMODS
+  usermods.shutdown();
+  #endif
   DEBUG_PRINTLN(F("WLED RESET"));
   ESP.restart();
 }

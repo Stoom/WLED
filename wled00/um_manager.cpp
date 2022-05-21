@@ -15,6 +15,7 @@ bool UsermodManager::handleButton(uint8_t b) {
 }
 
 void UsermodManager::setup()     { for (byte i = 0; i < numMods; i++) ums[i]->setup(); }
+void UsermodManager::shutdown()     { for (byte i = 0; i < numMods; i++) ums[i]->shutdown(); }
 void UsermodManager::connected() { for (byte i = 0; i < numMods; i++) ums[i]->connected(); }
 
 void UsermodManager::addToJsonState(JsonObject& obj)    { for (byte i = 0; i < numMods; i++) ums[i]->addToJsonState(obj); }

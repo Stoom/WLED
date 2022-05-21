@@ -230,6 +230,7 @@ class Usermod {
     virtual void handleOverlayDraw() {}
     virtual bool handleButton(uint8_t b) { return false; }
     virtual void setup() {}
+    virtual void shutdown() {}
     virtual void connected() {}
     virtual void addToJsonState(JsonObject& obj) {}
     virtual void addToJsonInfo(JsonObject& obj) {}
@@ -251,6 +252,7 @@ class UsermodManager {
     void handleOverlayDraw();
     bool handleButton(uint8_t b);
     void setup();
+    void shutdown();
     void connected();
     void addToJsonState(JsonObject& obj);
     void addToJsonInfo(JsonObject& obj);
