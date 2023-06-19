@@ -370,3 +370,15 @@
 #define INTERFACE_UPDATE_COOLDOWN 2000 //time in ms to wait between websockets, alexa, and MQTT updates
 
 #endif
+
+// Quinled Dig Quad GPIO pins
+#ifdef QUINLED_DIG_QUAD_V3R1
+#define LED1_GPIO_PIN 16
+#define LED2_GPIO_PIN 3
+#define LED3_GPIO_PIN 1
+#define LED4_GPIO_PIN 4
+#define Q1_GPIO_PIN 15
+#define Q2_GPIO_PIN 12
+#define Q3_GPIO_PIN 2
+#define Q4_GPIO_PIN 32
+#endif
