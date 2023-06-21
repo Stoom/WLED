@@ -266,7 +266,7 @@ class Usermod {
     Usermod() { um_data = nullptr; }
     virtual ~Usermod() { if (um_data) delete um_data; }
     virtual void setup() = 0;     // pure virtual, has to be overriden
-    virtual void shutdown() = 0;  // pure virtual, has to be overriden
+    virtual void shutdown() {return;}
     virtual void loop() = 0;      // pure virtual, has to be overriden
     virtual void handleOverlayDraw() {}                                      // called after all effects have been processed, just before strip.show()
     virtual bool handleButton(uint8_t b) { return false; }                   // button overrides are possible here

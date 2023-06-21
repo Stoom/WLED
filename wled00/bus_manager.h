@@ -444,25 +444,6 @@ public:
     return busId;
   }
 
-  // do not call this method from system context (network callback)
-  void removeAll()
-  {
-    DEBUG_PRINTLN(F("Removing all."));
-    // prevents crashes due to deleting busses while in use.
-    while (!canAllShow())
-      yield();
-    for (uint8_t i = 0; i < numBusses; i++)
-      delete busses[i];
-    numBusses = 0;
-  }
-
-  void show()
-  {
-    for (uint8_t i = 0; i < numBusses; i++)
-    {
-      busses[i]->show();
-    }
-  }
   inline uint8_t getNumBusses()
   {
     return numBusses;
