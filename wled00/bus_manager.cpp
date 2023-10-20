@@ -161,6 +161,10 @@ bool BusDigital::canShow() {
   return PolyBus::canShow(_busPtr, _iType);
 }
 
+bool BusDigital::getDoubleBuffer() {
+  return _buffering;
+}
+
 void BusDigital::setBrightness(uint8_t b) {
   if (_bri == b) return;
   //Fix for turning off onboard LED breaking bus
@@ -559,6 +563,25 @@ int BusManager::add(BusConfig &bc) {
     busses[numBusses] = new BusPwm(bc);
   }
   return numBusses++;
+}
+
+int BusManager:: replace(BusConfig &bc, uint8_t busId) {
+  if (busId >= WLED_MAX_BUSSES || busId > numBusses || busses[busId] == nullptr) return -1;
+
+  //prevents crashes due to deleting bus while in use.
+  while (!busses[i]->canShow()) yield();
+
+  delete busses[busId];
+  if (bc.type >= TYPE_NET_DDP_RGB && bc.type < 96) {
+    busses[busId] = new BusNetwork(bc);
+  } else if (IS_DIGITAL(bc.type)) {
+    busses[busId] = new BusDigital(bc, busId, colorOrderMap);
+  } else if (bc.type == TYPE_ONOFF) {
+    busses[busId] = new BusOnOff(bc);
+  } else {
+    busses[busId] = new BusPwm(bc);
+  }
+  return busId;
 }
 
 //do not call this method from system context (network callback)

@@ -141,6 +141,7 @@ class Bus {
     virtual uint8_t  getColorOrder()             { return COL_ORDER_RGB; }
     virtual uint8_t  skippedLeds()               { return 0; }
     virtual uint16_t getFrequency()              { return 0U; }
+    virtual bool     getDoubleBuffer()           { return false;}
     inline  void     setReversed(bool reversed)  { _reversed = reversed; }
     inline  uint16_t getStart()                  { return _start; }
     inline  void     setStart(uint16_t start)    { _start = start; }
@@ -335,6 +336,7 @@ class BusManager {
     BusManager() : numBusses(0) {};
 
   int add(BusConfig &bc);
+  int replace(BusConfig &bc, uint8_t busId);
 
   // do not call this method from system context (network callback)
   void removeAll();

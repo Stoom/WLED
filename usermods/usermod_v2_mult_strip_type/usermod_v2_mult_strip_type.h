@@ -168,6 +168,22 @@ public:
     }
   }
 
+  BusConfig newBusConfig(Bus *bus, uint8_t type, uint8_t start, uint8_t length, uint8_t colorOrder) {
+    uint8_t pins[5];
+    bus->getPins(pins);
+    return BusConfig(
+        type,
+        pins,
+        start,
+        length,
+        colorOrder,
+        bus->reversed,
+        bus->skippedLeds(),
+        bus->getAutoWhiteMode(),
+        bus->getFrequency(),
+        bus->getDoubleBuffer());
+  }
+
   void configureBus(uint8_t ch, int8_t busId, bool state)
   {
     Bus *bus = busses.getBus(busId);
@@ -178,17 +194,13 @@ public:
 
     savePrevBusConfig(ch, bus, !state);
 
-    uint8_t pins[5];
     uint16_t start = bus->getStart();
-    bus->getPins(pins);
-    BusConfig bc = BusConfig(
-        stripTypes[ch][state],
-        pins,
-        start,
-        stripLength[ch][state],
-        stripColorOrder[ch][state],
-        bus->reversed,
-        bus->skippedLeds());
+    BusConfig bc = newBusConfig(
+      bus,
+      stripTypes[ch][state],
+      start,
+      stripLength[ch][state],
+      stripColorOrder[ch][state]);
     busses.replace(bc, busId);
     recalcNextBus(busId, start, stripLength[ch][state]);
   }
@@ -202,18 +214,14 @@ public:
       return;
     }
 
-    uint8_t pins[5];
     uint16_t start = prevStart + prevLength;
     uint16_t len = bus->getLength();
-    bus->getPins(pins);
-    BusConfig bc = BusConfig(
-        bus->getType(),
-        pins,
-        start,
-        len,
-        bus->getColorOrder(),
-        bus->reversed,
-        bus->skippedLeds());
+    BusConfig bc = newBusConfig(
+      bus,
+      bus->getType(),
+      start,
+      len,
+      bus->getColorOrder());
     busses.replace(bc, busId);
     recalcNextBus(busId, start, len);
   }
