@@ -13,7 +13,7 @@
       ],
     },
     {
-      "type": "PlatformIO",
+      "type": "PlatformIO: Build",
       "label": "Build: binary only",
       "task": "Build",
       "group": {
