@@ -204,11 +204,6 @@ class Bus {
     void     freeData() { if (_data != nullptr) free(_data); _data = nullptr; }
 };
 
-class BusDigital : public Bus
-{
-public:
-  BusDigital(BusConfig &bc, uint8_t nr, const ColorOrderMap &com);
-
 class BusDigital : public Bus {
   public:
     BusDigital(BusConfig &bc, uint8_t nr, const ColorOrderMap &com);
@@ -250,11 +245,6 @@ class BusDigital : public Bus {
     }
 };
 
-class BusPwm : public Bus
-{
-public:
-  BusPwm(BusConfig &bc);
-
 class BusPwm : public Bus {
   public:
     BusPwm(BusConfig &bc);
@@ -278,11 +268,6 @@ class BusPwm : public Bus {
     void deallocatePins();
 };
 
-class BusOnOff : public Bus
-{
-public:
-  BusOnOff(BusConfig &bc);
-
 class BusOnOff : public Bus {
   public:
     BusOnOff(BusConfig &bc);
@@ -298,11 +283,6 @@ class BusOnOff : public Bus {
     uint8_t _pin;
     uint8_t _onoffdata;
 };
-
-class BusNetwork : public Bus
-{
-public:
-  BusNetwork(BusConfig &bc);
 
 class BusNetwork : public Bus {
   public:
@@ -326,11 +306,6 @@ class BusNetwork : public Bus {
     bool      _broadcastLock;
 };
 
-class BusManager
-{
-public:
-  BusManager(){};
-
 class BusManager {
   public:
     BusManager() : numBusses(0) {};
@@ -351,11 +326,10 @@ class BusManager {
     void setSegmentCCT(int16_t cct, bool allowWBCorrection = false);
     uint32_t getPixelColor(uint16_t pix);
 
-  // semi-duplicate of strip.getLengthTotal() (though that just returns strip._length, calculated in finalizeInit())
-  uint16_t getTotalLength();
-
-    //semi-duplicate of strip.getLengthTotal() (though that just returns strip._length, calculated in finalizeInit())
+    // semi-duplicate of strip.getLengthTotal() (though that just returns strip._length, calculated in finalizeInit())
     uint16_t getTotalLength();
+
+    Bus* getBus(uint8_t busNr);
     inline uint8_t getNumBusses() const { return numBusses; }
 
     inline void                 updateColorOrderMap(const ColorOrderMap &com) { memcpy(&colorOrderMap, &com, sizeof(ColorOrderMap)); }
@@ -366,18 +340,10 @@ class BusManager {
     Bus* busses[WLED_MAX_BUSSES+WLED_MIN_VIRTUAL_BUSSES];
     ColorOrderMap colorOrderMap;
 
-private:
-  uint8_t numBusses = 0;
-  Bus *busses[WLED_MAX_BUSSES + WLED_MIN_VIRTUAL_BUSSES];
-  ColorOrderMap colorOrderMap;
-
-  inline uint8_t getNumVirtualBusses()
-  {
-    int j = 0;
-    for (int i = 0; i < numBusses; i++)
-      if (busses[i]->getType() >= TYPE_NET_DDP_RGB && busses[i]->getType() < 96)
-        j++;
-    return j;
-  }
+    inline uint8_t getNumVirtualBusses() {
+      int j = 0;
+      for (int i=0; i<numBusses; i++) if (busses[i]->getType() >= TYPE_NET_DDP_RGB && busses[i]->getType() < 96) j++;
+      return j;
+    }
 };
 #endif
