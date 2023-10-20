@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-	<meta name="viewport" content="width=500">
-	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
 	<title>WiFi Settings</title>
 	<script>
 		var d = document;
@@ -193,6 +192,17 @@
 		Disable WiFi sleep: <input type="checkbox" name="WS"><br>
 		<i>Can help with connectivity issues.<br>
 		Do not enable if WiFi is working correctly, increases power consumption.</i>
+
+		<div id="remd">
+			<h3>Wireless Remote</h3>
+			<i>Listen for events over ESP-NOW<br>
+			Keep disabled if not using a remote, increases power consumption.<br></i>
+		
+			Enable Remote: <input type="checkbox" name="RE"><br>
+			Hardware MAC: <input type="text" name="RMAC"><br>
+			Last Seen: <span class="rlid">None</span> <br>
+		</div>
+
 		<div id="ethd">
 			<h3>Ethernet Type</h3>
 			<select name="ETH">
