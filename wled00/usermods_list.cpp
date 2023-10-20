@@ -197,10 +197,6 @@
 #include "../usermods/pwm_outputs/usermod_pwm_outputs.h"
 #endif
 
-#ifdef USEMOD_NV_SEGMENTS
-#include "../usermods/usermod_v2_nonvolatile_segments/usermod_v2_nonvolatile_segments.h"
-#endif
-
 #ifdef USEMOD_MST
 #include "../usermods/usermod_v2_mult_strip_type/usermod_v2_mult_strip_type.h"
 #endif
@@ -376,10 +372,6 @@ void registerUsermods()
 
   #ifdef USERMOD_SHT
   usermods.add(new ShtUsermod());
-  #endif
-
-  #ifdef USEMOD_NV_SEGMENTS
-  usermods.add(new UsermodNonvolatileSegments());
   #endif
 
   #ifdef USEMOD_MST

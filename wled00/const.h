@@ -158,8 +158,7 @@
 #define USERMOD_ID_KLIPPER               40     //Usermod Klipper percentage
 #define USERMOD_ID_WIREGUARD             41     //Usermod "wireguard.h"
 #define USERMOD_ID_INTERNAL_TEMPERATURE  42     //Usermod "usermod_internal_temperature.h"
-#define USERMOD_ID_NV_SEGMENTS           43     //Usermod "usermod_v2_nonvolatile_segments.h"
-#define USERMOD_ID_MST                   44     //Usermod "usermod_v2_mult_strip_type.h"
+#define USERMOD_ID_MST                   43     //Usermod "usermod_v2_mult_strip_type.h"
 
 //Access point behavior
 #define AP_BEHAVIOR_BOOT_NO_CONN          0     //Open AP when no connection after boot
